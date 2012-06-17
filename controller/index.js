@@ -3,7 +3,7 @@ var IndexController = function(settings, resource, app, manager) {
 		res.render('index', {
 			title: resource.index.title,
 			welcome: resource.index.welcome
-		})
+		});
 	});	
 };
 
