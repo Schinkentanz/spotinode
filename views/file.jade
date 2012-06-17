@@ -1,25 +1,25 @@
-if (folders !== null)
-	for folder in folders
-		table
-			thead
+if (folders != null)
+	table
+		thead
+			tr
+				th Ordnername
+		tbody
+			for folder in folders
 				tr
-					th Ordnername
-			tbody
-				tr
-					td #{folder.file}
+					td(data-path=folder.path) #{folder.file}
 
-if (files !== null)
-	for file in files
-		table
-			thead
-				tr
-					th Name
-					th Typ
-					th Titel
-					th Interpret
-					th Jahr
-					th Track
-			tbody
+if (files != null)
+	table
+		thead
+			tr
+				th Name
+				th Typ
+				th Titel
+				th Interpret
+				th Jahr
+				th Track
+		tbody
+			for file in files
 				tr
 					td #{file.name}
 					td #{file.type.toLowerCase()}
