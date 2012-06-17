@@ -10,7 +10,7 @@ var FileController = function(settings, resource, app, manager, utils) {
 			var folders = [];
 			var _files = [];
 			
-			for (var file in files[0]) {
+			for (var file in files) {
 				if (files[file]._type === settings.dao.file.types.FILE) {
 					_files.push(files[file]);
 				} else if (files[file]._type === settings.dao.file.types.FOLDER) {
@@ -19,8 +19,8 @@ var FileController = function(settings, resource, app, manager, utils) {
 				}
 			}
 			
-			res.render('files', {
-				files: files.length > 0 ? files : null,
+			res.render('file', {
+				files: _files.length > 0 ? _files : null,
 				folders: folders.length > 0 ? folders : null
 			});
 		});
