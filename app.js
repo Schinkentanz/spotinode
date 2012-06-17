@@ -28,7 +28,7 @@ var manager = utils.initialize('manager', settings, dao, cache, utils);
 //initialize controller
 var controller = utils.initialize('controller', settings, resource, app, manager, utils);
 
-//fire it up
+//fire it up 
 app.listen(settings.server.PORT, function() {
 	console.log('server is listening on port %d in %s mode', app.address().port, app.settings.env);
 });
