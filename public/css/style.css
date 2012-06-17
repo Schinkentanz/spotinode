@@ -4,4 +4,5 @@
 .songs th {
 	font-family: 'Bangers';
 	font-size: 20px;	
+	text-transform: uppercase;
 }
