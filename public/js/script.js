@@ -4,6 +4,7 @@ $(document).ready(function() {
 	$('.songs').on('click', 'td' , function() {
 		getFiles($(this).data('path'));		
 	})
+	
 });
 
 var getFiles = function(path) {
