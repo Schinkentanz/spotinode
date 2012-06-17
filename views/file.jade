@@ -29,4 +29,10 @@ if (folders != null || files != null)
 						td #{file.meta ? file.meta.year : '-/-'}
 						td #{file.meta ? file.meta.track : '-/-'}
 else
-	p nothing found
+	table.table.table-striped
+		thead
+			tr
+				th NIX
+		tbody
+				tr
+					td -/-

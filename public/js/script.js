@@ -1,43 +1,27 @@
 $(document).ready(function() {
-	getFiles();
-
+	getFiles('/files');
 	$('.songs').on('click', 'td', function() {
-		getFiles($(this).data('path'));
-	})
-
-	$('.search-query').keyup(function(event) {
-		getSuggestions($(this).val());
+		getFiles('/files', {
+			path: $(this).data('path')
+		});
 	});
 
+	$('.search-query').keyup(function(event) {
+		getFiles('/search', {
+			search: $(this).val()
+		});
+	});
 });
 
-var getFiles = function(path) {
+var getFiles = function(url, data) {
 	$.when($.ajax({
-		url : '/files',
+		url : url,
 		type : 'get',
 		cache : false,
-		data : {
-			path: path ? path : ''
-		}
+		data : data
 	})).then(function(html) {
-		console.log(html);
 		$('.songs').empty().append(html);
 	}, function() {
 		//error
 	});
 };
-
-var getSuggestions = function(search) {
-	$.when($.ajax({
-		url : '/search',
-		type : 'get',
-		cache : false,
-		data : {
-			search : search ? search : ''
-		}
-	})).then(function(html) {
-		$('.songs').empty().append(html);
-	}, function() {
-		//error
-	});
-}
