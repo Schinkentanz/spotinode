@@ -1,2 +1,2 @@
-spotinodes
+spotinode
 =========
