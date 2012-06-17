@@ -24,7 +24,8 @@ exports.settings = {
 	},
 	manager: {
 		file: {
-			CACHE_KEY: 'files',
+			CACHE_FILES_KEY: 'files',
+			CACHE_SEARCH_KEY: 'files',
 			ROOT_PATH: '/tf/music'
 		}
 	},

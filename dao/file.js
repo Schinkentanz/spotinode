@@ -7,6 +7,21 @@ var FileDAO = function(settings, mongo, utils) {
 	this.get = function(path, callback) {
 		mongo.files.find({
 			parent: path
+		}).sort({
+			name: 1,
+			path: 1
+		}, function(error, files) {
+			callback.call(null, error, files);
+		});
+	};
+	this.search = function(search, callback) {
+		var rxp = new RegExp('.*' + search + '.*', 'i');
+		mongo.files.find({
+			name: rxp,
+			path: rxp
+		}).sort({
+			name: 1,
+			path: 1
 		}, function(error, files) {
 			callback.call(null, error, files);
 		});

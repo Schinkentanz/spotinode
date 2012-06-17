@@ -1,29 +1,32 @@
-if (folders != null)
-	table
-		thead
-			tr
-				th Ordnername
-		tbody
-			for folder in folders
+if (folders != null || files != null)
+	if (folders != null)
+		table.table.table-striped
+			thead
 				tr
-					td(data-path=folder.path) #{folder.file}
-
-if (files != null)
-	table
-		thead
-			tr
-				th Name
-				th Typ
-				th Titel
-				th Interpret
-				th Jahr
-				th Track
-		tbody
-			for file in files
+					th Ordnername
+			tbody
+				for folder in folders
+					tr
+						td(data-path=folder.path) #{folder.file}
+	
+	if (files != null)
+		table.table.table-striped
+			thead
 				tr
-					td #{file.name}
-					td #{file.type.toLowerCase()}
-					td #{file.meta ? file.meta.tile : '-/-'}
-					td #{file.meta ? file.meta.artist : '-/-'}
-					td #{file.meta ? file.meta.year : '-/-'}
-					td #{file.meta ? file.meta.track : '-/-'}
+					th Name
+					th Typ
+					th Titel
+					th Interpret
+					th Jahr
+					th Track
+			tbody
+				for file in files
+					tr
+						td #{file.name}
+						td #{file.type.toLowerCase()}
+						td #{file.meta ? file.meta.tile : '-/-'}
+						td #{file.meta ? file.meta.artist : '-/-'}
+						td #{file.meta ? file.meta.year : '-/-'}
+						td #{file.meta ? file.meta.track : '-/-'}
+else
+	p nothing found

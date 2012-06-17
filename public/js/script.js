@@ -9,12 +9,13 @@ $(document).ready(function() {
 var getFiles = function(path) {
 	$.when($.ajax({
 		url : '/files',
-		type : 'get',
+		type : 'post',
 		cache : false,
 		data : {
 			path : path ? path : ''
 		}
 	})).then(function(html) {
+		log(html)
 		$('.songs').empty().append(html);
 	}, function() {
 		//error
