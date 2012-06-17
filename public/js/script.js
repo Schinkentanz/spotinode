@@ -1,10 +1,14 @@
 $(document).ready(function() {
 	getFiles();
 
-	$('.songs').on('click', 'td' , function() {
-		getFiles($(this).data('path'));		
+	$('.songs').on('click', 'td', function() {
+		getFiles($(this).data('path'));
 	})
-	
+
+	$('.search-query').keyup(function(event) {
+		getSuggestions($(this).val());
+	});
+
 });
 
 var getFiles = function(path) {
@@ -22,3 +26,18 @@ var getFiles = function(path) {
 		//error
 	});
 };
+
+var getSuggestions = function(search) {
+	$.when($.ajax({
+		url : '/search',
+		type : 'get',
+		cache : false,
+		data : {
+			search : search ? search : ''
+		}
+	})).then(function(html) {
+		$('.songs').empty().append(html);
+	}, function() {
+		//error
+	});
+}
