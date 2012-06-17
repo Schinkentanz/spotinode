@@ -24,15 +24,19 @@ var FileManager = function(settings, dao, cache, utils) {
 		dao.file.status(callback);
 	};
 	this.search = function(search, _cache, callback) {
-		var key = utils.hashCode(settings.manager.file.CACHE_SEARCH_KEY + _path);
-		var files = cache.get(key);
-		if (files === null || (typeof(!_cache) !== 'undefined' && !_cache)) {
-			dao.file.search(search, function(error, files) {
-				cache.set(key, files);
-				callback.call(null, error, files);
-			});
+		if (typeof(search) !== 'undefined' && search !== '') {
+			var key = utils.hashCode(settings.manager.file.CACHE_SEARCH_KEY + search);
+			var files = cache.get(key);
+			if (files === null || (typeof(_cache) !== 'undefined' && !_cache)) {
+				dao.file.search(search, function(error, files) {
+					cache.set(key, files);
+					callback.call(null, error, files);
+				});
+			} else {
+				callback.call(null, false, files);
+			}
 		} else {
-			callback.call(null, false, files);
+			callback.call(null, false, []);
 		}
 	}
 };

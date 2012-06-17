@@ -10,13 +10,13 @@ $(document).ready(function() {
 var getFiles = function(path) {
 	$.when($.ajax({
 		url : '/files',
-		type : 'post',
+		type : 'get',
 		cache : false,
 		data : {
-			path : path ? path : ''
+			path: path ? path : ''
 		}
 	})).then(function(html) {
-		log(html)
+		console.log(html);
 		$('.songs').empty().append(html);
 	}, function() {
 		//error

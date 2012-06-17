@@ -1,6 +1,6 @@
 var FileController = function(settings, resource, app, manager, utils) {
 	
-	var render = function(error, files, req, res) {
+	var render = function(error, files, req, res, view) {
 		var folders = [];
 		var _files = [];
 		
@@ -13,20 +13,20 @@ var FileController = function(settings, resource, app, manager, utils) {
 			}
 		}
 		
-		res.render('file', {
+		res.render(view, {
 			files: _files.length > 0 ? _files : null,
 			folders: folders.length > 0 ? folders : null
 		});
 	};
 	
-	app.post('/search', function(req, res) {
+	app.get('/search', function(req, res) {
 		manager.file.search(req.query.search, req.query.cache, function(error, files) {
-			render(error, files, req, res);
+			render(error, files, req, res, 'file');
 		});
-	});	
-	app.post('/files', function(req, res) {
+	});
+	app.get('/files', function(req, res) {
 		manager.file.get(req.query.path, req.query.cache, function(error, files) {
-			render(error, files, req, res);
+			render(error, files, req, res, 'file');
 		});
 	});
 	
