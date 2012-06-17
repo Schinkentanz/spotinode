@@ -15,7 +15,7 @@ var getFiles = function(path) {
 			path : path ? path : ''
 		}
 	})).then(function(html) {
-		$('.songs').append(html);
+		$('.songs').empty().append(html);
 	}, function() {
 		//error
 	});
