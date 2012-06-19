@@ -193,6 +193,7 @@ var FileDAO = function(settings, mongo, utils) {
 			if (start) {
 				dao.stop();
 			}
+			console.log('isIndexing: ', dao.indexing, '      wasStart: ', start);
 			if (typeof(cb) === 'function') {
 				cb();
 			}

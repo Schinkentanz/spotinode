@@ -26,7 +26,7 @@ exports.settings = {
 		file: {
 			CACHE_FILES_KEY: 'files',
 			CACHE_SEARCH_KEY: 'search',
-			ROOT_PATH: '/tf/music'
+			ROOT_PATH: '/data/music'
 		}
 	},
 	controller: {

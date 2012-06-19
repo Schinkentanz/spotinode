@@ -17,7 +17,7 @@ var FileManager = function(settings, dao, cache, utils) {
 			callback.call(null, false, files);
 		}
 	};
-	this.index = function(cache, callback) {
+	this.index = function(callback) {
 		dao.file.start(settings.manager.file.ROOT_PATH, callback);
 	};
 	this.status = function(callback) {

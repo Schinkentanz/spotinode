@@ -8,7 +8,6 @@ var FileController = function(settings, resource, app, manager, utils) {
 			if (files[file]._type === settings.dao.file.types.FILE) {
 				_files.push(files[file]);
 			} else if (files[file]._type === settings.dao.file.types.FOLDER) {
-				files[file].file = files[file].path.substring(files[file].path.lastIndexOf('/') + 1, files[file].path.length);
 				folders.push(files[file]);
 			}
 		}
@@ -35,7 +34,7 @@ var FileController = function(settings, resource, app, manager, utils) {
 		utils.prepareJSON(res);
 		next();
 	};
-	app.post('/files/index', prepare, function(req, res) {
+	app.get('/files/index', prepare, function(req, res) {
 		manager.file.index(function(success, indexing) {
 			res.send(JSON.stringify({
 				success: success,
@@ -43,7 +42,7 @@ var FileController = function(settings, resource, app, manager, utils) {
 			}));
 		});
 	});
-	app.post('/files/status', prepare, function(req, res) {
+	app.get('/files/status', prepare, function(req, res) {
 		manager.file.status(function(indexing) {
 			res.send(JSON.stringify({
 				indexing: indexing
