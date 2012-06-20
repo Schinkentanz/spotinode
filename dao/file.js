@@ -17,10 +17,10 @@ var FileDAO = function(settings, mongo, utils) {
 	this.search = function(search, callback) {
 		var rxp = new RegExp('.*' + search + '.*', 'i');
 		mongo.files.find({
-			name: rxp,
+			// name: rxp,
 			path: rxp
 		}).sort({
-			name: 1,
+			// name: 1,
 			path: 1
 		}, function(error, files) {
 			callback.call(null, error, files);
@@ -41,11 +41,12 @@ var FileDAO = function(settings, mongo, utils) {
 	this.start = function(path, callback) {
 		if (!this.indexing) {
 			this.indexing = true;
-			(function(dao, path) {
-				process.nextTick(function () {
-					dao.index(dao, path, true);
+			this.walk(this, path, function(dao, files) {
+				dao.remove(true);
+				dao.index(dao, files, function(dao) {
+					dao.stop();
 				});
-			})(this, path);
+			});
 			callback.call(null, true, true);
 		} else {
 			callback.call(null, false, true);
@@ -58,145 +59,107 @@ var FileDAO = function(settings, mongo, utils) {
 			
 		}
 	};
-	this.index = function(dao, path, start, cb) {
-		if (start) {
-			dao.remove(true);
-		}
-		async.waterfall([
-			function(callback) {
-				fs.readdir(path, function(error, files) {
-					callback(null, error, files);
-				});
-			},
-			function(error, files, callback) {
-				if (!error && files.length > 0) {
-					var _files = [];
-					for (var file in files) {
-						_files.push({
-							path: path + '/' + files[file],
-							file: files[file],
-							parent: path
+	this.walk = function(dao, path, callback) {
+		var result = [];
+		fs.readdir(path, function(err, files) {
+			var i = 0;
+			(function next() {
+				var file = files[i++];
+				if (!file)
+					return callback.call(null, dao, result);
+				var _path = path + '/' + file; 
+				fs.stat(_path, function(err, stat) {
+					if (stat) {
+						result.push({
+							path: _path,
+							file: file,
+							parent: path,
+							stat: stat
 						});
-					}
-					async.map(_files, function(file, callback) {
-						fs.stat(file.path, function(err, stat) {
-							callback(err, {
-								path: file.path,
-								file: file.file,
-								parent: file.parent,
-								stat: stat
+						if (stat.isDirectory()) {
+							dao.walk(dao, _path, function(err, _result) {
+								result = result.concat(_result);
+								next();
 							});
-						});
-					}, function(err, results) {
-						callback(null, err, results);
-					});
-				}
-			},
-			function(error, files, callback) {
-				if (!error && files.length > 0) {
-					async.map(files, function(file, callback) {
-						if (file.stat.isFile()) {
-							var name = file.file.substring(0, file.file.lastIndexOf('.'));
-							var type = file.file.substring(file.file.lastIndexOf('.') + 1, file.file.length).toUpperCase();
-							if (settings.dao.file.valid[type]) {
-								if (settings.dao.file.valid[type] === settings.dao.file.valid.MP3) {
-									fs.readFile(file.path, function(err, buffer) {
-										var meta = null;
-										if (!err) {
-											var id3 = new ID3(buffer);
-											id3.parse();
-											meta = {
-												title: id3.get('title'),
-												artist: id3.get('artist'),
-												album: id3.get('album'),
-												year: id3.get('year'),
-												comment: id3.get('comment'),
-												track: id3.get('track')
-											};
-											// meta.lyrics = id3.get('lyrics');
-											// meta.picture = id3.get('picture');
-										}
-										console.log('waterfall 3 (file)', file.path);
-										callback(err, {
-											path: file.path,
-											file: file.file,
-											parent: file.parent,
-											stat: file.stat,
-											meta: meta,
-											name: name,
-											type: type,
-											_type: settings.dao.file.types.FILE
-										});
-									});
-								} else {
-									callback(err, {
-										path: file.path,
-										file: file.file,
-										parent: file.parent,
-										stat: file.stat,
-										meta: null,
-										name: name,
-										type: type,
-										_type: settings.dao.file.types.FILE
-									});
-								}
-							}
-						} else if (file.stat.isDirectory()) {
-							callback(null, {
-								path: file.path,
-								file: file.file,
-								parent: file.parent,
-								stat: file.stat,
-								_type: settings.dao.file.types.FOLDER
-							});
+						} else {
+							next();
 						}
-					}, function(err, results) {
-						callback(null, err, results);
-					});
+					}
+				});
+			})();
+		});
+	};
+	this.index = function(dao, files, callback) {
+		var i = 0;
+		(function next() {
+			var file = files[i++];
+			if (!file) {
+				if (i < files.length) {
+					next();
+				} else {
+					return callback.call(null, dao);
 				}
-			},
-			function(error, files, callback) {
-				if (!error && files.length > 0) {
-					async.map(files, function(file, callback) {
-						var _cb = function() {
-							callback(null, true);
-						};
-						if (file._type === settings.dao.file.types.FILE) {
+			}
+			if (file.stat.isFile()) {
+				var name = file.file.substring(0, file.file.lastIndexOf('.'));
+				var type = file.file.substring(file.file.lastIndexOf('.') + 1, file.file.length).toUpperCase();
+				if (settings.dao.file.valid[type]) {
+					if (settings.dao.file.valid[type] === settings.dao.file.valid.MP3) {
+						fs.readFile(file.path, function(err, buffer) {
+							var meta = null;
+							if (!err) {
+								var id3 = new ID3(buffer);
+								id3.parse();
+								meta = {
+									title: id3.get('title'),
+									artist: id3.get('artist'),
+									album: id3.get('album'),
+									year: id3.get('year'),
+									comment: id3.get('comment'),
+									track: id3.get('track')
+								};
+								// meta.lyrics = id3.get('lyrics');
+								// meta.picture = id3.get('picture');
+							}
 							dao.save({
-								name: file.name,
-								type: file.type,
-								_type: file._type,
+								_type: settings.dao.file.types.FILE,
+								name: name,
+								type: type,
+								meta: meta,
 								size: file.stat.size,
 								time: file.stat.mtime.getTime(),
 								path: file.path,
-								meta: file.meta,
 								parent: file.parent
 							});
-							_cb();
-						} else if (file._type === settings.dao.file.types.FOLDER) {
-							dao.save({
-								file: file.file,
-								_type: file._type,
-								path: file.path,
-								time: file.stat.mtime.getTime(),
-								stat: file.stat,
-								parent: file.parent
-							});
-							dao.index(dao, file.path, false, _cb)
-						}
-					}, function(err, results) {
-						callback(null, results);
-					});
+							next();
+						});
+					} else {
+						dao.save({
+							_type: settings.dao.file.types.FILE,
+							name: name,
+							type: type,
+							meta: null,
+							size: file.stat.size,
+							time: file.stat.mtime.getTime(),
+							path: file.path,
+							parent: file.parent
+						});
+						next();
+					}
+				} else {
+					next();
 				}
+			} else if (file.stat.isDirectory()) {
+				dao.save({
+					_type: settings.dao.file.types.FOLDER,
+					path: file.path,
+					file: file.file,
+					parent: file.parent,
+					time: file.stat.mtime.getTime()
+				});
+				next();
 			}
-		], function(error, results) {
-			if (start) {
-				dao.stop();
-			}
-			if (typeof(cb) === 'function') {
-				cb();
-			}
-		});
+		})();
 	};
 	this.stop = function() {
 		this.indexing = false;
