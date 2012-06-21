@@ -8,6 +8,23 @@ if (typeof(title) != 'undefined')
 			link(rel='stylesheet', href='/css/style.css')
 			link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Bangers')
 		body
+			div.navbar.navbar-fixed-top
+				div.navbar-inner
+					div.container
+						a.brand spotinode
+						div.nav-collapse
+							ul.nav
+								li.active
+									a(href='#!') Home
+								li
+									a(href='#!') Link
+								li
+									a(href='#!') Link
+								li
+									a(href='#!') Link
+							audio(controls='true', autoplay='true')
+							form.navbar-search.pull-right
+								input.search-query.span2(type='text', placeholder='Finden ...')
 			!= body
 			script(src='/js/jquery.js')
 			script(src='/js/bootstrap.min.js')

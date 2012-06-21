@@ -30,11 +30,8 @@ var FileController = function(settings, resource, app, manager, utils) {
 	});
 	
 	
-	var prepare = function(req, res, next) {
+	app.get('/files/index', function(req, res) {
 		utils.prepareJSON(res);
-		next();
-	};
-	app.get('/files/index', prepare, function(req, res) {
 		manager.file.index(function(success, indexing) {
 			res.send(JSON.stringify({
 				success: success,
@@ -42,7 +39,8 @@ var FileController = function(settings, resource, app, manager, utils) {
 			}));
 		});
 	});
-	app.get('/files/status', prepare, function(req, res) {
+	app.get('/files/status', function(req, res) {
+		utils.prepareJSON(res);
 		manager.file.status(function(status) {
 			res.send(JSON.stringify(status));
 		});

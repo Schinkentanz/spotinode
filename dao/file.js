@@ -2,7 +2,7 @@ var fs = require('fs'),
 	ID3 = require('id3');
 
 var FileDAO = function(settings, mongo, utils) {
-	this.status = {
+	this.stat = {
 		indexing: false,
 		percentage: 0
 	};
@@ -38,12 +38,12 @@ var FileDAO = function(settings, mongo, utils) {
 		});
 	};
 	this.status = function(callback) {
-		callback.call(null, this.status);
+		callback.call(null, this.stat);
 	};
 	this.start = function(path, callback) {
-		if (!this.status.indexing) {
-			this.status.percentage = 0;
-			this.status.indexing = true;
+		if (!this.stat.indexing) {
+			this.stat.percentage = 0;
+			this.stat.indexing = true;
 			this.walk(this, path, function(dao, files) {
 				dao.remove(true);
 				dao.index(dao, files, function(dao) {
@@ -96,7 +96,7 @@ var FileDAO = function(settings, mongo, utils) {
 		var i = 0;
 		(function next() {
 			var file = files[i++];
-			dao.status.percentage = i / (files.length - 1) * 100;
+			dao.stat.percentage = i / (files.length - 1) * 100;
 			if (!file) {
 				if (i < files.length) {
 					next();
@@ -166,7 +166,7 @@ var FileDAO = function(settings, mongo, utils) {
 		})();
 	};
 	this.stop = function() {
-		this.indexing = false;
+		this.stat.indexing = false;
 	};
 };
 

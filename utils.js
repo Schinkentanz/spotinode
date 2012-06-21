@@ -1,3 +1,6 @@
+String.prototype.startsWith = function(str) { return (this.match('^' + str) == str) };
+
+
 var fs = require('fs');
 
 exports.utils = {
@@ -24,5 +27,11 @@ exports.utils = {
 			// Convert to 32bit integer
 		}
 		return hash;
+	},
+	isPathValid: function(path, reference) {
+		if (typeof(path) !== 'undefined' && path.startsWith(reference) && path.indexOf('..') === -1) {
+			return true;
+		}
+		return false;
 	}
 };

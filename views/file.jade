@@ -21,7 +21,7 @@ if (folders != null || files != null)
 					th Track
 			tbody
 				for file in files
-					tr
+					tr(data-path=file.path, data-stream='true')
 						td #{file.name}
 						td #{file.type.toLowerCase()}
 						td #{file.meta ? file.meta.title : '-/-'}
