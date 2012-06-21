@@ -1,9 +1,11 @@
 var fs = require('fs'),
-	ID3 = require('id3'),
-	async = require('async')
+	ID3 = require('id3');
 
 var FileDAO = function(settings, mongo, utils) {
-	this.indexing = false;
+	this.status = {
+		indexing: false,
+		percentage: 0
+	};
 	this.get = function(path, callback) {
 		mongo.files.find({
 			parent: path
@@ -36,18 +38,19 @@ var FileDAO = function(settings, mongo, utils) {
 		});
 	};
 	this.status = function(callback) {
-		callback.call(null, this.indexing);
+		callback.call(null, this.status);
 	};
 	this.start = function(path, callback) {
-		if (!this.indexing) {
-			this.indexing = true;
+		if (!this.status.indexing) {
+			this.status.percentage = 0;
+			this.status.indexing = true;
 			this.walk(this, path, function(dao, files) {
 				dao.remove(true);
 				dao.index(dao, files, function(dao) {
 					dao.stop();
 				});
 			});
-			callback.call(null, true, true);
+			callback.call(null, true, true); //success, indexing
 		} else {
 			callback.call(null, false, true);
 		}
@@ -93,6 +96,7 @@ var FileDAO = function(settings, mongo, utils) {
 		var i = 0;
 		(function next() {
 			var file = files[i++];
+			dao.status.percentage = i / (files.length - 1) * 100;
 			if (!file) {
 				if (i < files.length) {
 					next();

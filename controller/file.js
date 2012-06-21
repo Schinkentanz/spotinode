@@ -43,10 +43,8 @@ var FileController = function(settings, resource, app, manager, utils) {
 		});
 	});
 	app.get('/files/status', prepare, function(req, res) {
-		manager.file.status(function(indexing) {
-			res.send(JSON.stringify({
-				indexing: indexing
-			}));
+		manager.file.status(function(status) {
+			res.send(JSON.stringify(status));
 		});
 	});
 };
