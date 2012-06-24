@@ -1,12 +1,12 @@
-if (typeof(title) != 'undefined')
+if (typeof(noLayout) == 'undefined')
 	!!!
 	html
 		head
 			title= title
 			link(rel='stylesheet', href='/css/bootstrap.min.css')
 			link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
-			link(rel='stylesheet', href='/css/style.css')
-			link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Bangers')
+			link(rel='stylesheet', href='/css/style.css')^
+			script(src='/js/modernizr.min.js')
 		body
 			div.navbar.navbar-fixed-top
 				div.navbar-inner
@@ -22,13 +22,17 @@ if (typeof(title) != 'undefined')
 									a(href='#!') Link
 								li
 									a(href='#!') Link
-							audio(controls='true', autoplay='true')
 							form.navbar-search.pull-right
 								input.search-query.span2(type='text', placeholder='Finden ...')
 			!= body
-			script(src='/js/jquery.js')
+			div.navbar.navbar-fixed-bottom
+				div.navbar-inner
+					div#player
+			script(src='/js/jquery.min.js')
 			script(src='/js/bootstrap.min.js')
-			script(src='/js/script.js')
+			script(src='/js/flowplayer.min.js')
+			script(src='/js/swfobject.js')
 			script(src='/js/plugins.js')
+			script(src='/js/script.js')
 else
 	!= body

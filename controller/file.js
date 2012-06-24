@@ -1,6 +1,5 @@
 var FileController = function(settings, resource, app, manager, utils) {
-	
-	var render = function(error, files, req, res, view) {
+	var render = function(req, res, files, parent, view) {
 		var folders = [];
 		var _files = [];
 		
@@ -14,21 +13,28 @@ var FileController = function(settings, resource, app, manager, utils) {
 		
 		res.render(view, {
 			files: _files.length > 0 ? _files : null,
-			folders: folders.length > 0 ? folders : null
+			folders: folders.length > 0 ? folders : null,
+			noLayout: true,
+			utils: utils,
+			parent: parent ? utils.idToString(parent) : null
 		});
 	};
 	
-	app.get('/search', function(req, res) {
-		manager.file.search(req.query.search, req.query.cache, function(error, files) {
-			render(error, files, req, res, 'file');
-		});
-	});
 	app.get('/files', function(req, res) {
-		manager.file.get(req.query.path, req.query.cache, function(error, files) {
-			render(error, files, req, res, 'file');
+		manager.file.get({
+			folder: req.query.folder
+		}, req.query.cache, function(error, files, parent) {
+			render(req, res, files, parent, 'file');
 		});
 	});
 	
+	app.get('/search', function(req, res) {
+		manager.file.search({
+			search: req.query.search
+		}, req.query.cache, function(error, files, parent) {
+			render(req, res, files, parent, 'file');
+		});
+	});
 	
 	app.get('/files/index', function(req, res) {
 		utils.prepareJSON(res);
@@ -39,6 +45,7 @@ var FileController = function(settings, resource, app, manager, utils) {
 			}));
 		});
 	});
+	
 	app.get('/files/status', function(req, res) {
 		utils.prepareJSON(res);
 		manager.file.status(function(status) {

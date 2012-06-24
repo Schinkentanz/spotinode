@@ -1,10 +1,9 @@
+var mongojs = require('mongojs'),
+	ObjectId = mongojs.ObjectId;
+
 var StreamManager = function(settings, dao, cache, utils) {
-	this.action = function(path, callback) {
-		var _path = settings.manager.file.ROOT_PATH;
-		if (utils.isPathValid(path, settings.manager.file.ROOT_PATH)) {
-			_path = path;
-		}
-		dao.stream.action(path, callback);
+	this.action = function(id, callback) {
+		dao.stream.action(id ? new ObjectId(id) : null, callback);
 	};
 };
 

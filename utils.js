@@ -33,5 +33,8 @@ exports.utils = {
 			return true;
 		}
 		return false;
+	},
+	idToString: function(id) {
+		return id.toString().replace('"', '');
 	}
 };

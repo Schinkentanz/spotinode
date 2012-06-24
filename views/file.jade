@@ -1,16 +1,19 @@
 if (folders != null || files != null)
 	if (folders != null)
-		table.table.table-striped
+		table.folders.table.table-striped
 			thead
 				tr
-					th Ordnername
+					th Ordner
 			tbody
+				if (parent)
+					tr(data-folder=parent)
+						td \..
 				for folder in folders
-					tr
-						td(data-path=folder.path) #{folder.file}
+					tr(data-folder=utils.idToString(folder._id))
+						td #{folder.name}
 	
 	if (files != null)
-		table.table.table-striped
+		table.files.table.table-striped
 			thead
 				tr
 					th Name
@@ -19,20 +22,28 @@ if (folders != null || files != null)
 					th Interpret
 					th Jahr
 					th Track
+					th Datum
+					th Gr&ouml;&szlig;e
 			tbody
+				if (parent)
+					tr(data-folder=parent)
+						td(colspan=8) \..
 				for file in files
-					tr(data-path=file.path, data-stream='true')
+					date = new Date(file.time);
+					tr(data-file=utils.idToString(file._id), data-path=file.path)
 						td #{file.name}
 						td #{file.type.toLowerCase()}
 						td #{file.meta ? file.meta.title : '-/-'}
 						td #{file.meta ? file.meta.artist : '-/-'}
 						td #{file.meta ? file.meta.year : '-/-'}
 						td #{file.meta ? file.meta.track : '-/-'}
+						td #{('0' + date.getDay()).slice(-2) + '.' + ('0' + (date.getMonth() + 1)).slice(-2) + '.' + date.getFullYear()}
+						td #{Math.round(file.size / 1024 / 1024 * 10) / 10} MB
 else
 	table.table.table-striped
 		thead
 			tr
 				th NIX
 		tbody
-				tr
+				tr(data-parent=parent)
 					td -/-

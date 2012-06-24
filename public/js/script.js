@@ -1,18 +1,65 @@
 $(document).ready(function() {
 	
-	$('.songs').on('click', 'tr', function() {
-		if ($(this).data('stream')) {
-			$('audio').attr({
-				src: '/stream?path=' + $(this).data('path')
-			});
+	var flash = swfobject.hasFlashPlayerVersion('10.1');
+	var html5 = false;
+	if (flash) {
+		$f('player', '/swf/flowplayer.swf', {
+			debug: true, 
+			plugins: {
+				audio: {
+					url: '/swf/flowplayer.audio.swf'
+				},
+				controls: {
+					url: '/swf/flowplayer.controls.swf',
+					fullscreen: false,
+					height: 30,
+					autoHide: false
+				}
+			},
+			clip: {
+				autoPlay: false,
+				onBeforeBegin: function() {
+					$f().close();
+				}
+			}
+		})
+	} else if ($('html').hasClass('audio')) {
+		html5 = true;
+		$('#player').replaceWith(
+			$('<audio />').attr({
+				id: 'player',
+				controls: true,
+				autoplay: true
+			})
+		)
+	}
+	
+	$('.songs').on('click', 'table tr[data-file]', function() {
+		var path = '/stream.mp3?file=' + $(this).data('file')
+		if (flash) {
+			$f().play(path);
+		} else if (html5) {
+			$('#player').attr({
+				src: path
+			})
 		}
 	});
-	$('.songs').on('click', 'td', function() {
+	
+	
+	
+	$('.songs').on('click', 'table tr[data-folder]', function() {
 		getFiles('/files', {
-			path: $(this).data('path'),
+			folder: $(this).data('folder'),
 			cache: false
 		});
 	});
+	
+	
+	
+	
+	
+	
+	
 	$('.search-query').keyup(function(event) {
 		var val = $.trim($(this).val());
 		if (val !== '') {
@@ -21,13 +68,19 @@ $(document).ready(function() {
 				cache: false
 			});
 		} else {
-			getFiles('/files');
+			getFiles('/files', {
+				cache: false
+			});
 		}
+	}).submit(function() {
+		return false;
 	});
-	getFiles('/files');
 	
 	
-	$('.btn-primary').on('click', function() {
+	
+	
+	
+	$('#index').on('click', function() {
 		$.ajax({
 			url: '/files/index',
 			success: function(status) {
@@ -36,6 +89,12 @@ $(document).ready(function() {
 				}
 			}
 		});
+	});
+	
+	
+	
+	getFiles('/files', {
+		cache: false
 	});
 	getStatus();
 });
@@ -59,6 +118,8 @@ var getStatus = function() {
 		success: function(status) {
 			$('.progress .bar').css({
 				width: status.indexing ? status.percentage + '%' : 0
+			}).parent().animate({
+				top: status.indexing ? 0 : -18
 			});
 			if (status.indexing) {
 				setTimeout(getStatus, 1000);

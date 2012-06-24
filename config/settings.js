@@ -25,6 +25,7 @@ exports.settings = {
 	manager: {
 		file: {
 			CACHE_FILES_KEY: 'files',
+			CACHE_FILES_ROOT_KEY: 'filesRoot',
 			CACHE_SEARCH_KEY: 'search',
 			ROOT_PATH: '/data/downloads/music'
 		}
@@ -38,6 +39,6 @@ exports.settings = {
 		HOST: '127.0.0.1',
 		PORT: 27017,
 		DATABASE: 'local',
-		COLLECTIONS: ['files']
+		COLLECTIONS: ['files', 'index']
 	}
 }

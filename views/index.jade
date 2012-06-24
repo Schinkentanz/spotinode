@@ -5,4 +5,19 @@ div.container-fluid
 		div.span2.playlists
 		div.span8.songs
 		div.span2.misc
-			a.btn.btn-primary.btn-large Indezieren
+			div.well(style='padding: 8px 0;')
+				ul.nav.nav-list
+					li.nav-header Optionen
+					li
+						a#index(href='#!') 
+							i.icon-cog
+							= 'Indizieren'
+					li
+						a(href='#!')
+							i.icon-pencil
+							= 'Editieren'
+					li.divider
+					li
+						a(href='#!')
+							i.icon-flag
+							= 'Hilfe'
