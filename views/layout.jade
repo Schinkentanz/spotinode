@@ -27,7 +27,22 @@ if (typeof(noLayout) == 'undefined')
 			!= body
 			div.navbar.navbar-fixed-bottom
 				div.navbar-inner
-					div#player
+					div.container
+						div#bar
+							button.btn.prev
+								i.icon-step-backward
+							button.btn.play
+								i.icon-play
+							button.btn.next
+								i.icon-step-forward
+							button.btn.stop
+								i.icon-stop
+							button.btn.repeat
+								i.icon-repeat
+							div.progress
+								div.bar
+						div#player.visuallyhidden
+						//div#player
 			script(src='/js/jquery.min.js')
 			script(src='/js/bootstrap.min.js')
 			script(src='/js/flowplayer.min.js')

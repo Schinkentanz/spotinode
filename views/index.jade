@@ -3,6 +3,14 @@ div.progress.progress-striped.active
 div.container-fluid
 	div.row-fluid
 		div.span2.playlists
+			div.well(style='padding: 8px 0;')
+				ul.nav.nav-list
+					li.nav-header Playlists
+				ul.nav.nav-list.all
+				ul.nav.nav-list
+					li.divider
+					li.nav-header.playlist Playlistos
+				ul.nav.nav-list.active
 		div.span8.songs
 		div.span2.misc
 			div.well(style='padding: 8px 0;')
@@ -21,3 +29,8 @@ div.container-fluid
 						a(href='#!')
 							i.icon-flag
 							= 'Hilfe'
+					li.divider
+					li
+						a(href='/logout')
+							i.icon-volume-off
+							= 'Logout'

@@ -25,8 +25,11 @@ var dao = utils.initialize('dao', settings, mongo, utils);
 //initialize manager
 var manager = utils.initialize('manager', settings, dao, cache, utils);
 
+//initialize authenticator
+var authenticator = require('./authenticator.js')(manager);
+
 //initialize controller
-var controller = utils.initialize('controller', settings, resource, app, manager, utils);
+var controller = utils.initialize('controller', settings, resource, app, manager, utils, authenticator);
 
 //fire it up 
 app.listen(settings.server.PORT, function() {

@@ -73,8 +73,6 @@ var FileDAO = function(settings, mongo, utils) {
 			
 		}
 	};
-	
-	
 	this.count = function(dao, path, callback) {
 		var counted = 0;
 		fs.readdir(path, function(error, files) {
@@ -103,7 +101,6 @@ var FileDAO = function(settings, mongo, utils) {
 			})();
 		});
 	};
-	
 	this.walk = function(dao, path, parent, callback) {
 		fs.readdir(path, function(error, files) {
 			var i = 0;

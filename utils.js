@@ -4,11 +4,11 @@ String.prototype.startsWith = function(str) { return (this.match('^' + str) == s
 var fs = require('fs');
 
 exports.utils = {
-	initialize: function(folder, a1, a2, a3, a4, a5) {
+	initialize: function(folder, a1, a2, a3, a4, a5, a6) {
 		var obj = {};
 		fs.readdirSync('./' + folder).forEach(function(file) {
 			var tmp = require('./' + folder + '/' + file);
-			obj[file.substring(0, file.lastIndexOf('.'))] = new tmp(a1, a2, a3, a4, a5);
+			obj[file.substring(0, file.lastIndexOf('.'))] = new tmp(a1, a2, a3, a4, a5, a6);
 		});
 		return obj;
 	},
@@ -27,12 +27,6 @@ exports.utils = {
 			// Convert to 32bit integer
 		}
 		return hash;
-	},
-	isPathValid: function(path, reference) {
-		if (typeof(path) !== 'undefined' && path.startsWith(reference) && path.indexOf('..') === -1) {
-			return true;
-		}
-		return false;
 	},
 	idToString: function(id) {
 		return id.toString().replace('"', '');

@@ -1,4 +1,4 @@
-var FileController = function(settings, resource, app, manager, utils) {
+var FileController = function(settings, resource, app, manager, utils, authenticator) {
 	var render = function(req, res, files, parent, view) {
 		var folders = [];
 		var _files = [];
@@ -19,38 +19,66 @@ var FileController = function(settings, resource, app, manager, utils) {
 			parent: parent ? utils.idToString(parent) : null
 		});
 	};
-	
-	app.get('/files', function(req, res) {
-		manager.file.get({
-			folder: req.query.folder
-		}, req.query.cache, function(error, files, parent) {
-			render(req, res, files, parent, 'file');
-		});
-	});
-	
-	app.get('/search', function(req, res) {
-		manager.file.search({
-			search: req.query.search
-		}, req.query.cache, function(error, files, parent) {
-			render(req, res, files, parent, 'file');
-		});
-	});
-	
-	app.get('/files/index', function(req, res) {
-		utils.prepareJSON(res);
-		manager.file.index(function(success, indexing) {
+	app.get('/files', authenticator, function(req, res) {
+		if (req.session.logged) {
+			manager.file.get({
+				folder: req.query.folder
+			}, req.query.cache, function(error, files, parent) {
+				render(req, res, files, parent, 'file');
+			});
+		} else {
+			
+			//redirect --> index?
+			
+			utils.prepareJSON(res);
 			res.send(JSON.stringify({
-				success: success,
-				indexing: indexing
+				logged: false
 			}));
-		});
+		}
 	});
 	
-	app.get('/files/status', function(req, res) {
+	app.get('/search', authenticator, function(req, res) {
+		if (req.session.logged) {
+			manager.file.search({
+				search: req.query.search
+			}, req.query.cache, function(error, files, parent) {
+				render(req, res, files, parent, 'file');
+			});
+		} else {
+			utils.prepareJSON(res);
+			res.send(JSON.stringify({
+				logged: false
+			}));
+		}
+	});
+	
+	app.get('/files/index', authenticator, function(req, res) {
 		utils.prepareJSON(res);
-		manager.file.status(function(status) {
-			res.send(JSON.stringify(status));
-		});
+		if (req.session.logged) {
+			manager.file.index(function(success, indexing) {
+				res.send(JSON.stringify({
+					success: success,
+					indexing: indexing
+				}));
+			});
+		} else {
+			res.send(JSON.stringify({
+				logged: false
+			}));
+		}
+	});
+	
+	app.get('/files/status', authenticator, function(req, res) {
+		utils.prepareJSON(res);
+		if (req.session.logged) {
+			manager.file.status(function(status) {
+				res.send(JSON.stringify(status));
+			});
+		} else {
+			res.send(JSON.stringify({
+				logged: false
+			}));
+		}
 	});
 };
 
