@@ -54,7 +54,7 @@ body > .progress {
 
 .navbar-fixed-bottom,
 .navbar-fixed-bottom .container {
-	height: 40px;
+	/*height: 40px;*/
 }
 #bar {
 	width: 100%;

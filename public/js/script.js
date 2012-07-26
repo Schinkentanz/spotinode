@@ -34,9 +34,7 @@ $(document).ready(function() {
 				onFinish: function() {
 					flow.stop();
 					console.log('onFinish', flow.getState());
-					if (!player.next() && player.repeat) {
-						player.next();
-					} else {
+					if (!player.next()) {
 						bar.find('.play i').removeClass('icon-pause').addClass('icon-play');
 						interval();
 					}
@@ -137,10 +135,11 @@ $(document).ready(function() {
 						bar.find('.progress .bar').css({
 							width: time / clip.duration * 100 + '%'
 						});
+						console.log(time, clip.duration, flow.getStatus().time);
 					} else {
 						clearInterval(_interval);
 					}
-				}, 1000 / 60);
+				}, 1000);
 			}
 		};
 		
