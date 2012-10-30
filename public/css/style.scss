@@ -1,0 +1,115 @@
+.visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+
+
+
+.songs td {
+	cursor: pointer;
+}
+.songs th {
+	text-transform: uppercase;
+}
+
+
+body > .progress {
+	top: -18px;
+	position: relative;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
+
+
+
+
+
+.playlists .all li,
+.playlists .active li {
+	
+}
+.playlists .all li a,
+.playlists .active li a {
+	white-space: pre;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+
+
+
+
+
+.navbar {
+	.container {
+		position: relative;
+	}
+	
+	&.navbar-fixed-bottom,
+	&.navbar-fixed-bottom .container {
+		height: 40px;
+	}
+}
+
+
+#bar {
+	width: 100%;
+	height: 40px;
+	
+	button {
+		float: left;
+	}
+	
+	.repeat {
+		margin-right: 10px;
+	}
+	
+	.progress {
+		float: right;
+		width: 35%;
+		margin-top: 11px;
+		
+		> .bar {
+			-webkit-transition: none !important;
+			transition: none !important;
+		}
+	}
+}
+
+
+#player {
+	display: none;
+}
+
+
+#login {
+	.input-prepend input {
+		width: 160px;
+	}
+	
+	form {
+		margin: 0;
+	}
+}
+
+
+body {
+	padding-top: 43px;
+	padding-bottom: 43px;
+}
+
+@media (max-width: 979px) {
+	body {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+}
+

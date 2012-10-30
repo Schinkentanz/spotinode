@@ -1,53 +1,49 @@
 if (typeof(noLayout) == 'undefined')
-	!!!
-	html
-		head
-			title= title
-			link(rel='stylesheet', href='/css/bootstrap.min.css')
-			link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
-			link(rel='stylesheet', href='/css/style.css')^
-			script(src='/js/modernizr.min.js')
-		body
-			div.navbar.navbar-fixed-top
-				div.navbar-inner
-					div.container
-						a.brand spotinode
-						div.nav-collapse
-							ul.nav
-								li.active
-									a(href='#!') Home
-								li
-									a(href='#!') Link
-								li
-									a(href='#!') Link
-								li
-									a(href='#!') Link
-							form.navbar-search.pull-right
-								input.search-query.span2(type='text', placeholder='Finden ...')
-			!= body
-			div.navbar.navbar-fixed-bottom
-				div.navbar-inner
-					div.container
-						div#bar
-							button.btn.prev
-								i.icon-step-backward
-							button.btn.play
-								i.icon-play
-							button.btn.next
-								i.icon-step-forward
-							button.btn.stop
-								i.icon-stop
-							button.btn.repeat
-								i.icon-repeat
-							div.progress
-								div.bar
-						//div#player.visuallyhidden
-						div#player
-			script(src='/js/jquery.min.js')
-			script(src='/js/bootstrap.min.js')
-			script(src='/js/flowplayer.min.js')
-			script(src='/js/swfobject.js')
-			script(src='/js/plugins.js')
-			script(src='/js/script.js')
+    !!!
+    html
+        head
+            title= title
+            link(rel='stylesheet', href='/css/bootstrap.min.css')
+            link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
+            link(rel='stylesheet', href='/css/style.css')^
+            script(src='/js/modernizr.min.js')
+        body
+            div.navbar.navbar-fixed-top
+                div.navbar-inner
+                    div.container
+                        a.brand spotinode
+                        div.nav-collapse
+                            ul.nav
+                                li.active
+                                    a(href='#!') Home
+                                li
+                                    a(href='#!') Link
+                                li
+                                    a(href='#!') Link
+                                li
+                                    a(href='#!') Link
+                            form.navbar-search.pull-right
+                                input.search-query.span2(type='text', placeholder='Finden ...')
+            != body
+            div.navbar.navbar-fixed-bottom
+                div.navbar-inner
+                    div.container
+                        div#bar
+                            button.btn.prev
+                                i.icon-step-backward
+                            button.btn.play
+                                i.icon-play
+                            button.btn.next
+                                i.icon-step-forward
+                            button.btn.stop
+                                i.icon-stop
+                            button.btn.repeat
+                                i.icon-repeat
+                            div.progress
+                                div.bar
+            script(src='/js/jquery.min.js')
+            script(src='/js/bootstrap.min.js')
+            script(src='/js/plugins.js')
+            script(src='/js/script.js')
 else
-	!= body
+    != body

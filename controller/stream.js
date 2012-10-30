@@ -7,7 +7,9 @@ var StreamController = function(settings, resource, app, manager, utils, authent
 				if (stream) {
 					res.writeHead(200, {
 						'Content-Type': 'audio/mpeg',
-						'Content-Length': stat.size
+						'Content-Length': stat.size,
+						'Content-Range': 'bytes 0-' + stat.size + '/' + stat.size,
+						'Accept-Ranges': 'bytes'
 					});
 					util.pump(stream, res);
 				} else {

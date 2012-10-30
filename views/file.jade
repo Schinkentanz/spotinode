@@ -1,58 +1,58 @@
 if (folders != null || files != null)
-	if (folders != null)
-		table.folders.table.table-striped
-			thead
-				tr
-					th Ordner
-			tbody
-				if (parent)
-					tr(data-folder=parent)
-						td \..
-				for folder in folders
-					tr(data-folder=utils.idToString(folder._id))
-						td #{folder.name}
-	
-	if (files != null)
-		table.files.table.table-striped
-			thead
-				tr
-					th &nbsp;
-					th Name
-					th Typ
-					th Titel
-					th Interpret
-					th Jahr
-					th Track
-					th Datum
-					th Gr&ouml;&szlig;e
-			tbody
-				if (parent)
-					tr(data-folder=parent)
-						td(colspan=9) \..
-					tr
-						td(colspan=9)
-							button.btn.btn-min.add-all
-								i.icon-plus-sign
-								i.icon-plus-sign
-				for file in files
-					date = new Date(file.time);
-					tr(data-file=utils.idToString(file._id))
-						td 
-							button.btn.btn-mini.add
-								i.icon-plus-sign
-						td #{file.name}
-						td #{file.type.toLowerCase()}
-						td #{file.meta ? file.meta.title : '-/-'}
-						td #{file.meta ? file.meta.artist : '-/-'}
-						td #{file.meta ? file.meta.year : '-/-'}
-						td #{file.meta ? file.meta.track : '-/-'}
-						td #{('0' + date.getDay()).slice(-2) + '.' + ('0' + (date.getMonth() + 1)).slice(-2) + '.' + date.getFullYear()}
-						td #{Math.round(file.size / 1024 / 1024 * 10) / 10} MB
+    if (folders != null)
+        table.folders.table.table-striped
+            thead
+                tr
+                    th Ordner
+            tbody
+                if (parent)
+                    tr(data-folder=parent)
+                        td \..
+                for folder in folders
+                    tr(data-folder=utils.idToString(folder._id))
+                        td #{folder.name}
+    
+    if (files != null)
+        table.files.table.table-striped
+            thead
+                tr
+                    th &nbsp;
+                    th Name
+                    th Typ
+                    th Titel
+                    th Interpret
+                    th Jahr
+                    th Track
+                    th Datum
+                    th Gr&ouml;&szlig;e
+            tbody
+                if (parent)
+                    tr(data-folder=parent)
+                        td(colspan=9) \..
+                    tr
+                        td(colspan=9)
+                            button.btn.btn-min.add-all
+                                i.icon-plus-sign
+                                i.icon-plus-sign
+                for file in files
+                    date = new Date(file.time);
+                    tr(data-file=utils.idToString(file._id))
+                        td 
+                            button.btn.btn-mini.add
+                                i.icon-plus-sign
+                        td #{file.name}
+                        td #{file.type.toLowerCase()}
+                        td #{file.meta ? file.meta.title : '-/-'}
+                        td #{file.meta ? file.meta.artist : '-/-'}
+                        td #{file.meta ? file.meta.year : '-/-'}
+                        td #{file.meta ? file.meta.track : '-/-'}
+                        td #{('0' + date.getDay()).slice(-2) + '.' + ('0' + (date.getMonth() + 1)).slice(-2) + '.' + date.getFullYear()}
+                        td #{Math.round(file.size / 1024 / 1024 * 10) / 10} MB
 else
-	table.table.table-striped
-		thead
-			tr
-				th Nix, Nada, Nohting, Rien
-		tbody
-				tr(data-folder=parent)
-					td \..
+    table.table.table-striped
+        thead
+            tr
+                th Nix, Nada, Nohting, Rien
+        tbody
+                tr(data-folder=parent)
+                    td \..
