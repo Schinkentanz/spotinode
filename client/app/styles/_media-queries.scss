@@ -1,0 +1,193 @@
+$units: 1px !default;
+
+@mixin screen($res-min, $res-max)
+{
+  @media screen and ( min-width: if(unitless($res-min), $res-min*$units, $res-min) ) and ( max-width: if(unitless($res-max), $res-max*$units, $res-max) )
+  {
+    @content;
+  }
+}
+
+@mixin max-screen($res)
+{
+  @media screen and ( max-width: if(unitless($res), $res*$units, $res) )
+  {
+    @content;
+  }
+}
+
+@mixin min-screen($res)
+{
+  @media screen and ( min-width: if(unitless($res), $res*$units, $res) )
+  {
+    @content;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// --- retina ----------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+
+@mixin retina
+{
+  @media only screen and (-webkit-device-pixel-ratio: 2)
+  {
+    @content;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// --- iphone ----------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+
+@mixin iphone3
+{
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px)
+  and (-webkit-device-pixel-ratio: 1)
+  {
+    @content;
+  }
+}
+
+@mixin iphone3-portrait
+{
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px)
+  and (-webkit-device-pixel-ratio: 1) and (orientation:portrait)
+  {
+    @content;
+  }
+}
+
+@mixin iphone3-landscape
+{
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px)
+  and (-webkit-device-pixel-ratio: 1) and (orientation:landscape)
+  {
+    @content;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// --- iphone-retina ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+
+@mixin iphone4
+{
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px)
+  and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3)
+  {
+    @content;
+  }
+}
+
+@mixin iphone4-portrait
+{
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px)
+  and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3) and (orientation:portrait)
+  {
+    @content;
+  }
+}
+
+@mixin iphone4-landscape
+{
+  @media only screen and (min-device-width: 320px)  and (max-device-width: 480px)
+  and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3) and (orientation:landscape)
+  {
+    @content;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// --- iphone-5 --------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+
+@mixin iphone5
+{
+  @media only screen and (min-device-width: 320px) and (max-device-width: 568px)
+  and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 40/71)
+  {
+    @content;
+  }
+}
+
+@mixin iphone5-portrait
+{
+  @media only screen and (min-device-width: 320px) and (max-device-width: 568px)
+  and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 40/71) and (orientation:portrait)
+
+  {
+    @content;
+  }
+}
+
+@mixin iphone5-landscape
+{
+  @media only screen and (min-device-width: 320px) and (max-device-width: 568px)
+  and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 40/71) and (orientation:landscape)
+  {
+    @content;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// --- ipad + ipad mini ------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+
+@mixin ipad
+{
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px)
+  and (-webkit-device-pixel-ratio: 1)
+  {
+    @content;
+  }
+}
+
+@mixin ipad-portrait
+{
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px)
+  and (-webkit-device-pixel-ratio: 1) and (orientation:portrait)
+  {
+    @content;
+  }
+}
+
+@mixin ipad-landscape
+{
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px)
+  and (-webkit-device-pixel-ratio: 1) and (orientation:landscape)
+  {
+    @content;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// --- ipad-retina -----------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+
+@mixin ipad-retina
+{
+  @media screen and (min-device-width: 768px) and (max-device-width: 1024px)
+  and (-webkit-device-pixel-ratio: 2)
+  {
+    @content;
+  }
+}
+
+@mixin ipad-retina-portrait
+{
+  @media screen and (min-device-width: 768px) and (max-device-width: 1024px)
+  and (-webkit-device-pixel-ratio: 2) and (orientation:portrait)
+  {
+    @content;
+  }
+}
+
+@mixin ipad-retina-landscape
+{
+  @media screen and (min-device-width: 768px) and (max-device-width: 1024px)
+  and (-webkit-device-pixel-ratio: 2) and (orientation:landscape)
+  {
+    @content;
+  }
+}

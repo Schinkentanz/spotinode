@@ -1,0 +1,40 @@
+@import "media-queries";
+
+// Custom max-screen mixins
+@mixin min-screen-sm() {
+  @include min-screen($screen-sm) {
+    @content;
+  };
+}
+
+@mixin max-screen-sm() {
+  @include max-screen($screen-xs-max) {
+    @content;
+  };
+}
+
+@mixin min-screen-md() {
+  @include min-screen($screen-md) {
+    @content;
+  };
+}
+
+@mixin max-screen-md() {
+  @include max-screen($screen-sm-max) {
+    @content;
+  }
+}
+
+@mixin min-screen-lg() {
+  @include min-screen($screen-lg) {
+    @content;
+  }
+}
+
+@mixin max-screen-lg() {
+  @include max-screen($screen-md-max) {
+    @content;
+  }
+}
+
+

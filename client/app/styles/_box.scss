@@ -1,0 +1,110 @@
+.box {
+  height: 250px;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: $grid-gutter-width;
+
+  .background {
+    @extend .depth-1;
+
+    height: 100%;
+    left: $grid-gutter-width / 2;
+    right: $grid-gutter-width / 2;
+    position: absolute;
+    background: center center no-repeat;
+    background-size: cover;
+    padding-bottom: 0; // lazy-image
+    transition-property: box-shadow;
+    transition-duration: 500ms;
+
+    @include max-screen-sm() {
+      background-position: top center;
+    }
+  }
+
+  &:hover .background {
+    @extend .depth-2;
+  }
+
+  .description {
+    position: absolute;
+    bottom: 0;
+    left: $grid-gutter-width / 2;
+    right: $grid-gutter-width / 2;
+    padding: $grid-gutter-width / 2;
+    color: #FFF;
+    background: linear-gradient(rgba(#000, 0) 0%, rgba(#000, .6) 100%);
+
+    small {
+      color: inherit;
+    }
+  }
+
+  .options {
+    @extend .transition-all;
+
+    position: absolute;
+    left: $grid-gutter-width / 2;
+    bottom: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-30px, 0px) scale(.5);
+
+    .btn {
+      min-width: 20px;
+    }
+  }
+
+  &:hover .options {
+    pointer-events: initial;
+    opacity: 1;
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  @include max-screen-lg() {
+    height: 210px;
+  }
+
+  @include max-screen-md() {
+    .h4 {
+      font-size: $font-size-base;
+    }
+  }
+
+  @include max-screen-sm() {
+    height: 200px;
+  }
+
+  &-list {
+    height: auto;
+    padding: $grid-gutter-width / 2;
+    transition: background 500ms;
+    border-radius: $border-radius-base;
+
+    &:hover {
+      background: #FAFAFA;
+    }
+
+    .background {
+      height: 100px;
+      width: 100px;
+      float: left;
+      position: static;
+    }
+
+    .description {
+      color: #000;
+      position: static;
+      background: none;
+      margin-left: 100px;
+    }
+
+    .options {
+      position: static;
+      transform: none;
+      opacity: 1;
+      margin-top: 5px;
+      transition: none;
+    }
+  }
+}

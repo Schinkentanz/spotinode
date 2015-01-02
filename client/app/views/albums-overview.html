@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+
+    <div class="am-fade pagination-loader" ng-if="pagination.isLoading"></div>
+    <div class="col-xs-12 tac pagination-wrapper am-fade-and-slide-top" ng-if="pagination.total">
+      <pagination ng-model="pagination.currentPage"
+                  ng-change="pagination.pageChanged()"
+                  total-items="pagination.total"
+                  items-per-page="pagination.limit"
+                  max-size="viewport.isLtMD ? pagination.max / 2 : pagination.max"
+                  boundary-links="true"
+                  class="pagination"
+                  previous-text="&lsaquo;"
+                  next-text="&rsaquo;"
+                  first-text="&laquo;"
+                  last-text="&raquo;"
+                  ng-class="{'pagination-sm': viewport.isLtMD}"></pagination>
+      <p class="text-muted small" ng-bind="pagination.text"></p>
+    </div>
+    <div class="clearfix"></div>
+
+    <div sn-album-box
+         ng-repeat-start="album in albums"></div>
+    <div class="clearfix" ng-repeat-end ng-if="!isBoxView && $index % 2"></div>
+
+  </div>
+</div>

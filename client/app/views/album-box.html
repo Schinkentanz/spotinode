@@ -1,0 +1,39 @@
+<div class="box album-box am-fade" ng-class="{'col-md-3 col-sm-4': isBoxView, 'col-sm-6 box-list': !isBoxView}" id="{{ album._id }}"
+     ng-click="showAlbumCard(album)">
+
+  <div sn-card
+       sn-album-card
+       ng-if="album.showCard"></div>
+
+  <div afkl-lazy-image="{{ album.image }}" class="background" afkl-lazy-image-options="{{ lazyOptions }}" ng-if="lazyOptions"></div>
+
+  <div class="description">
+    <span class="h4">
+      <small ng-bind="album.artists.length === 1 ? album.artists[0].name : 'Various Artists'"></small><br>
+      <span ng-bind="album.name"></span>
+    </span>
+    <div class="options">
+      <button class="btn btn-default btn-xs"
+              ng-if="album.bio"
+              ng-click="stopPropagation($event)"
+              bs-popover
+              data-placement="auto left"
+              data-trigger="hover"
+              container="body"
+              html="true"
+              title="{{ album.name }}"
+              data-content="{{ album.bio }}"
+              data-animation="am-fade">
+        <i class="fa fa-info"></i>
+      </button>
+      <button class="btn btn-default btn-xs">
+        <i class="fa fa-music"></i>
+      </button>
+      <button class="btn btn-default btn-xs">
+        <i class="fa fa-play"></i>
+      </button>
+    </div>
+  </div>
+
+</div>
+

@@ -1,0 +1,52 @@
+<div class="card am-fade container-fluid">
+
+  <div ng-include="'/views/card-close.html'" ng-if="!isLoading && !isClosing"></div>
+
+  <div class="row artist-view am-fade" ng-if="!isLoading && !isClosing">
+    <div class="col-xs-12">
+      <h2 ng-bind="artist.name" ng-class="{h3: viewport.isXS}"></h2>
+      <p ng-bind-html="artist.bio"></p>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs nav-pills card-nav am-fade" ng-if="!isLoading && !isClosing && albums.length && titles.length">
+    <li role="presentation" ng-class="{active: showAlbumsTab}">
+      <a href="" ng-click="showAlbums()">Albums <span class="badge" ng-bind="albums.length"></span></a></a>
+    </li>
+    <li ng-class="{active: !showAlbumsTab}">
+      <a href="" ng-click="showTitles()">Titles <span class="badge" ng-bind="titles.length"></span></a>
+    </li>
+  </ul>
+
+  <div class="row">
+    <div class="col-xs-12"
+         sn-album-view
+         ng-repeat="album in albums track by album._id"
+         ng-if="albums.length && showAlbumsTab && !isLoading && !isClosing">
+    </div>
+
+    <div class="col-xs-12 am-fade-and-slide-left"
+         ng-if="(!albums.length || !showAlbumsTab) && !isLoading && !isClosing">
+
+      <p>
+        <button class="btn btn-default btn-xs btn-outline" ng-click="playTitles(titles)">
+          <i class="fa fa-play"></i>
+        </button>
+        <br><br>
+      </p>
+
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <tbody>
+            <tr ng-repeat="title in titles track by title._id"
+                show-album-name
+                sn-title-view></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <span us-spinner ng-if="isLoading"></span>
+
+</div>

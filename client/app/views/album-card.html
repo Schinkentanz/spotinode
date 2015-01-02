@@ -1,0 +1,15 @@
+<div class="card am-fade container-fluid">
+
+  <div ng-include="'/views/card-close.html'" ng-if="!isLoading && !isClosing"></div>
+
+  <div class="row">
+    <div class="col-xs-12"
+         sn-album-view
+         show-artist-name
+         ng-if="!isLoading && !isClosing">
+    </div>
+  </div>
+
+  <span us-spinner ng-if="isLoading"></span>
+
+</div>

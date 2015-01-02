@@ -1,0 +1,53 @@
+.album-view {
+
+  & + & {
+    margin-top: $grid-gutter-width;
+  }
+
+  header {
+    margin-bottom: $grid-gutter-width / 2;
+
+    article {
+      margin-left: 150px + $grid-gutter-width / 2;
+
+      @include max-screen-sm() {
+        margin-left: 75px + $grid-gutter-width / 2;
+      }
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    small {
+      display: block;
+      font-size: $font-size-small;
+    }
+  }
+
+  .album-options {
+    margin: $grid-gutter-width / 2 0;
+  }
+
+  .wiki {
+
+  }
+
+  .cover {
+    height: 150px;
+    width: 150px;
+    float: left;
+    background: center center no-repeat;
+    background-size: cover;
+    margin-right: $grid-gutter-width / 2;
+
+    @include max-screen-sm() {
+      height: 75px;
+      width: 75px;
+    }
+  }
+
+  .table {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,32 @@
+.title-view {
+  cursor: pointer;
+
+  .small-col {
+    width: 35px;
+  }
+
+  .fa-play {
+    display: none;
+  }
+
+  button {
+    margin-right: 10px;
+  }
+
+  .tar {
+    white-space: nowrap;
+  }
+
+  &:hover {
+    .counter {
+
+      span {
+        display: none;
+      }
+
+      .fa-play {
+        display: inline-block;
+      }
+    }
+  }
+}

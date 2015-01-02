@@ -1,0 +1,72 @@
+<div class="card am-fade container-fluid" id="settings">
+
+  <div ng-include="'/views/card-close.html'" ng-if="!isLoading && !isClosing"></div>
+
+  <div class="row am-fade"
+       ng-show="!isLoading && !isClosing">
+
+    <form name="form" class="form-horizontal col-sm-8 col-sm-offset-2" ng-submit="saveSettings()">
+
+
+      
+      <div class="form-group" ng-class="{'has-error': settings.folders.length === 0}">
+        <label for="folder1" class="col-sm-4">Music folder paths</label>
+        <div class="col-sm-8">
+          <div class="add-folder am-fade-and-slide-left" ng-repeat="folder in folders">
+            <div class="input-group">
+              <input type="text" class="form-control" id="folder{{ $index }}" ng-model="folder.path" required>
+              <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" ng-click="removeFolder(folder)">
+                  <i class="fa fa-times"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+          <div class="add-folder tar">
+            <button type="button" class="btn btn-default" ng-click="addFolder()">
+              <i class="fa fa-plus"></i> <i class="fa fa-folder"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': form.requestLimit.$invalid && form.requestLimit.$dirty}">
+        <label for="requestLimit" class="col-sm-4">Pagination limit</label>
+        <div class="col-sm-8">
+          <input type="number" class="form-control" id="requestLimit" name="requestLimit" ng-model="settings.requestLimit" required>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': form.lastFmKey.$invalid && form.lastFmKey.$dirty}">
+        <label for="lastFmKey" class="col-sm-4">LastFM API key</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="lastFmKey" name="lastFmKey" ng-model="settings.lastFmKey" required>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': form.lastFmSecret.$invalid && form.lastFmSecret.$dirty}">
+        <label for="lastFmSecret" class="col-sm-4">LastFM API secret</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="lastFmSecret" name="lastFmSecret" ng-model="settings.lastFmSecret" required>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': form.acoustIdKey.$invalid && form.acoustIdKey.$dirty}">
+        <label for="acoustIdKey" class="col-sm-4">AcoustID API key</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="acoustIdKey" name="acoustIdKey" ng-model="settings.acoustIdKey" required>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="tar">
+        <button class="btn btn-primary" type="submit" ng-disabled="isLoading || form.$invalid">Save</button>
+      </div>
+    </form>
+
+  </div>
+
+  <span us-spinner ng-if="isLoading"></span>
+
+</div>

@@ -1,0 +1,49 @@
+@import "bootstrap";
+
+$fa-font-path: "../bower_components/fontawesome/fonts/" !default;
+
+@import "../bower_components/fontawesome/scss/font-awesome";
+
+
+@import "mixins";
+
+@import "globals";
+
+@import "pagination";
+
+@import "settings";
+
+@import "card";
+@import "backdrop";
+
+@import "box";
+
+@import "artist-box";
+@import "artist-view";
+
+@import "album-box";
+@import "album-view";
+
+@import "title-view";
+
+@import "player-bar";
+
+@import "index-progress";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*# sourceMappingURL=main.css.map */

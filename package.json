@@ -1,9 +1,0 @@
-{
-  "name": "spotinode",
-  "main": "index.html",
-  "window": {
-    "toolbar": false,
-    "width": 1024,
-    "height": 768
-  }
-}

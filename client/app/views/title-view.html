@@ -1,0 +1,29 @@
+<tr class="title-view" ng-click="playTitle(title)" ng-class="{strong: currentTitle._id === title._id}">
+  <td class="small-col counter">
+    <span ng-bind="title.track" ng-if="showIndexNumber"></span>
+    <i class="fa fa-play"></i>
+  </td>
+  <td class="tac small-col" ng-if="!hideAdd">
+    <a href="" ng-click="addToPlaylist($event, title)">
+      <i class="fa fa-plus"></i>
+    </a>
+  </td>
+  <td ng-bind="title.artist.name" ng-if="showArtistName"></td>
+  <td ng-bind="title.name"></td>
+  <td ng-bind="title.album.name" ng-if="showAlbumName"></td>
+  <td class="tar">
+    <button class="btn btn-default btn-xs"
+            ng-if="viewport.isGtXS && title.wiki"
+            ng-click="stopPropagation($event)"
+            bs-popover
+            data-placement="auto left"
+            data-trigger="hover"
+            container="body"
+            html="true"
+            title="{{ $parent.title.artist.name }} - {{ $parent.title.name }}"
+            data-content="{{ $parent.title.wiki + 'asdasd' }}"
+            data-animation="am-fade">
+      <i class="fa fa-info"></i>
+    </button><span ng-bind="title.duration | duration"></span>
+  </td>
+</tr>

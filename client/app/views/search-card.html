@@ -1,0 +1,70 @@
+<div class="card am-fade container-fluid">
+
+  <div ng-include="'/views/card-close.html'" ng-if="!isLoading && !isClosing"></div>
+
+  <div class="row am-fade"
+       ng-show="!isLoading && !isClosing">
+
+    <div class="col-md-offset-2 col-md-8">
+      <div class="form-group">
+        <div class="input-group input-lg">
+          <span class="input-group-addon">
+            <i class="fa fa-search"></i>
+          </span>
+          <input type="text" class="form-control" ng-change="updateSearch()" ng-model="query">
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+
+    <h2 class="col-xs-12 am-fade" ng-if="!haveData">No results for {{ query }} ...</h2>
+
+
+    <h2 class="am-fade col-xs-12" ng-if="data.artists.length">Artists</h2>
+    <div class="clearfix"></div>
+
+    <div sn-artist-box
+         disable-lazy-load
+         ng-repeat="artist in data.artists track by artist._id"></div>
+
+    <div class="clearfix"></div>
+
+    <h2 class="am-fade col-xs-12" ng-if="data.albums.length">Albums</h2>
+    <div class="clearfix"></div>
+
+    <div sn-album-box
+         disable-lazy-load
+         ng-repeat="album in data.albums track by album._id"></div>
+
+    <div class="clearfix"></div>
+
+    <h2 class="am-fade col-xs-12" ng-if="data.titles.length">Titles</h2>
+    <div class="clearfix"></div>
+
+    <div class="col-xs-12 am-fade-and-slide-left" ng-if="data.titles.length">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Artist</th>
+              <th>Song</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="title in data.titles"
+                sn-title-view
+                show-artist-name></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <span us-spinner ng-if="isLoading"></span>
+
+</div>

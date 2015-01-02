@@ -1,0 +1,35 @@
+<div class="box artist-box am-fade" ng-class="{'col-md-3 col-sm-4': isBoxView, 'col-sm-6 box-list': !isBoxView}" id="{{ artist._id }}"
+     ng-click="showArtistCard(artist)">
+
+  <div sn-card
+       sn-artist-card
+       ng-if="artist.showCard"></div>
+
+  <div afkl-lazy-image="{{ artist.image }}" class="background" afkl-lazy-image-options="{{ lazyOptions }}" ng-if="lazyOptions"></div>
+
+  <div class="description">
+    <span class="h4" ng-bind="artist.name"></span>
+    <div class="options">
+      <button class="btn btn-default btn-xs"
+              ng-if="artist.bio"
+              ng-click="stopPropagation($event)"
+              bs-popover
+              data-placement="auto left"
+              data-trigger="hover"
+              container="body"
+              html="true"
+              title="{{ artist.name }}"
+              data-content="{{ artist.bio }}"
+              data-animation="am-fade">
+        <i class="fa fa-info"></i>
+      </button>
+      <button class="btn btn-default btn-xs">
+        <i class="fa fa-music"></i>
+      </button>
+      <button class="btn btn-default btn-xs">
+        <i class="fa fa-play"></i>
+      </button>
+    </div>
+  </div>
+
+</div>

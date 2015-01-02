@@ -1,0 +1,57 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#/">spotinode</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="#/artists">Artists</a></li>
+        <li><a href="#/albums">Albums</a></li>
+        <li><a href="#/titles">Titles</a></li>
+      </ul>
+
+      <div class="pull-right">
+
+        <div class="btn-group" ng-click="toggleListBoxView()">
+          <button class="btn navbar-btn" ng-disabled="isBoxView" ng-class="{'btn-primary': isBoxView, 'btn-default': !isBoxView}">
+            <i class="fa fa-th-large"></i>
+          </button>
+          <button class="btn navbar-btn" ng-disabled="!isBoxView" ng-class="{'btn-primary': !isBoxView, 'btn-default': isBoxView}">
+            <i class="fa fa-list"></i>
+          </button>
+        </div>
+
+        <button class="btn btn-primary navbar-btn" ng-click="playRandom()">
+          <i class="fa fa-random"></i>
+        </button>
+
+        <button class="btn btn-primary navbar-btn" ng-click="showSearch(true)">
+          <i class="fa fa-search"></i>
+        </button>
+
+        <button class="btn btn-warning navbar-btn" ng-click="showSettings(true)">
+          <i class="fa fa-cogs"></i>
+        </button>
+
+        <button class="btn btn-danger navbar-btn" ng-click="startIndex()" ng-disabled="isIndexing()">
+          <i class="fa fa-database"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div sn-card
+     sn-search-card
+     ng-if="showSearchCard"></div>
+
+<div sn-card
+     sn-settings-card
+     ng-if="showSettingsCard"></div>

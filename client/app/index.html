@@ -1,0 +1,95 @@
+<!doctype html>
+<html class="no-js" ng-app="spotinode">
+  <head>
+    <meta charset="utf-8">
+    <title>client</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <!-- build:css(.tmp) styles/m.css -->
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css">
+    <link rel="stylesheet" href="bower_components/angular-motion/dist/modules/fade-and-slide.min.css">
+    <link rel="stylesheet" href="bower_components/angular-motion/dist/modules/fade.min.css">
+    <link rel="stylesheet" href="bower_components/afkl-lazy-image/release/lazy-image-style.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div sn-navbar></div>
+
+    <div sn-index-progress></div>
+
+    <div ng-view></div>
+
+    <div sn-player></div>
+
+    <div class="backdrop am-fade" ng-if="showBackdrop"></div>
+
+    <!-- build:js({app,.tmp}) scripts/m.js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+
+    <script src="bower_components/underscore/underscore-min.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/60fps-scroll/dist/60fps-scroll.js"></script>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+
+    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.min.js"></script>
+    <script src="bower_components/afkl-lazy-image/release/lazy-image.min.js"></script>
+    <script src="bower_components/ui-bootstrap/src/pagination/pagination.js"></script>
+
+    <script src="bower_components/angular-strap/dist/modules/dimensions.min.js"></script>
+    <script src="bower_components/angular-strap/dist/modules/tooltip.min.js"></script>
+    <script src="bower_components/angular-strap/dist/modules/tooltip.tpl.min.js"></script>
+    <script src="bower_components/angular-strap/dist/modules/popover.min.js"></script>
+    <script src="bower_components/angular-strap/dist/modules/popover.tpl.min.js"></script>
+    <script src="bower_components/angular-strap/dist/modules/popover.tpl.min.js"></script>
+
+    <script src="scripts/app.js"></script>
+
+    <script src="scripts/constants/image-sizes-constant.js"></script>
+    <script src="scripts/constants/player-events-constant.js"></script>
+    <script src="scripts/constants/pagination-constants.js"></script>
+
+    <script src="scripts/filters/duration-filter.js"></script>
+
+    <script src="scripts/controllers/albums-overview-ctrl.js"></script>
+    <script src="scripts/controllers/artists-overview-ctrl.js"></script>
+    <script src="scripts/controllers/titles-overview-ctrl.js"></script>
+
+    <script src="scripts/directives/album-view-directive.js"></script>
+    <script src="scripts/directives/album-box-directive.js"></script>
+    <script src="scripts/directives/artist-card-directive.js"></script>
+    <script src="scripts/directives/artist-box-directive.js"></script>
+    <script src="scripts/directives/album-card-directive.js"></script>
+    <script src="scripts/directives/search-card-directive.js"></script>
+    <script src="scripts/directives/card-directive.js"></script>
+    <script src="scripts/directives/player-directive.js"></script>
+    <script src="scripts/directives/title-view-directive.js"></script>
+    <script src="scripts/directives/index-progress-directive.js"></script>
+    <script src="scripts/directives/navbar-directive.js"></script>
+    <script src="scripts/directives/settings-card-directive.js"></script>
+
+    <script src="scripts/services/albums-api-service.js"></script>
+    <script src="scripts/services/artists-api-service.js"></script>
+    <script src="scripts/services/titles-api-service.js"></script>
+    <script src="scripts/services/settings-api-service.js"></script>
+
+    <script src="scripts/services/player-service.js"></script>
+    <script src="scripts/services/card-helper-service.js"></script>
+    <script src="scripts/services/image-helper-service.js"></script>
+    <script src="scripts/services/index-progress-service.js"></script>
+    <script src="scripts/services/pagination-helper-service.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

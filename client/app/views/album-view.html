@@ -1,0 +1,47 @@
+<div class="album-view am-fade-and-slide-left">
+  <header>
+    <figure afkl-lazy-image="{{ album.image }}" class="cover" afkl-lazy-image-options='{"background": true, "nolazy": true}' ></figure>
+    <article>
+      <p ng-if="showArtistName">
+        <span ng-class="{'h5': viewport.isXS, 'h4': viewport.isGtXS}" ng-bind="album.artists.length === 1 ? album.artists[0].name : 'Various Artists'"></span><br>
+        <span class="text-muted"
+              ng-class="{'h6': viewport.isXS, 'h5': viewport.isGtXS}"
+              ng-if="album.artists.length > 1"
+              ng-repeat="artist in album.artists"
+              ng-bind="artist.name + ',&nbsp;'"></span>
+      </p>
+      <h3 ng-class="{'h4': viewport.isXS}">{{ album.name }}</h3>
+      <small ng-bind="album.date | date" ng-if="album.date"></small>
+      <div class="album-options">
+        <button class="btn btn-xs btn-default"
+                ng-if="album.wiki"
+                ng-click="album.showWiki = !album.showWiki">
+          <i class="fa fa-info"></i>
+        </button>
+        <button class="btn btn-xs btn-default" ng-click="playTitles(album.titles)">
+          <i class="fa fa-play"></i>
+        </button>
+      </div>
+      <p ng-if="album.showWiki" ng-bind-html="album.wiki" class="wiki am-fade-and-slide-top"></p>
+    </article>
+    <div class="clearfix"></div>
+  </header>
+
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th></th>
+          <th ng-if="album.artists.length > 1">Artist</th>
+          <th>Song</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-if="album.artists.length > 1" ng-repeat="title in album.titles | orderBy:'track'" sn-title-view show-index-number show-artist-name></tr>
+        <tr ng-if="album.artists.length === 1" ng-repeat="title in album.titles | orderBy:'track'" sn-title-view show-index-number></tr>
+      </tbody>
+    </table>
+  </div>
+</div>

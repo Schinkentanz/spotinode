@@ -1,0 +1,53 @@
+.card {
+  @extend .depth-4;
+
+  padding: $grid-gutter-width / 2;
+  position: fixed;
+  cursor: default;
+  top: 3%;
+  left: 3%;
+  width: 94%;
+  bottom: calc(3% + 56px);
+  background: #FFF;
+  z-index: 1050;
+  overflow: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  will-change: box-shadow, top, left, bottom;
+
+  &.positioned {
+    @extend .transition-all;
+  }
+
+  .close {
+    top: 3%;
+    right: 3%;
+    z-index: 10;
+    cursor: pointer;
+    position: fixed;
+    padding: $grid-gutter-width / 2;
+    background: radial-gradient(ellipse at center, #FFF 0%, #FFF 20%, transparent 60%);
+  }
+
+  .card-nav {
+    margin: $grid-gutter-width 0;
+  }
+
+  @include max-screen-sm() {
+    top: 0;
+    left: 0;
+    width: 100%;
+    bottom: 101px;
+    // z-index: 1000;
+    box-shadow: none;
+
+    .close {
+      right: 0;
+      top: 0;
+    }
+  }
+}
+
+body.card-open {
+  overflow: hidden;
+}

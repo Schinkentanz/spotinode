@@ -1,0 +1,109 @@
+.player-bar {
+  @extend .transition-all;
+
+  min-height: initial;
+  padding: 5px 0;
+  z-index: 1050;
+  will-change: box-shadow, background;
+
+  &.playlist-visible {
+    background: #FFF;
+    box-shadow: 0px -17px 50px rgba(#000, .19);
+  }
+
+  &.no-transition .progress-bar {
+    transition: none;
+  }
+
+  .buttons {
+    white-space: nowrap;
+  }
+
+  .progress {
+    height: 33px;
+    margin: 6px 0;
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    background-color: darken($progress-bg, 5%);
+  }
+
+  .invisible {
+    position: absolute;
+    white-space: nowrap;
+  }
+
+  .progress-bar-primary {
+    &:after {
+      left: 0;
+      top: 50%;
+      position: absolute;
+      z-index: 1;
+      color: #000;
+      min-width: 100%;
+      transform: translate(0, -50%);
+      content: attr(data-progress-text);
+      will-change: transform, left;
+      text-shadow: 1px 1px 10px #FFF,
+                   -1px -1px 10px #FFF,
+                   -1px 1px 10px #FFF,
+                   1px -1px 10px #FFF;
+    }
+
+    &.marquee {
+      &:after {
+        animation: marquee 20s linear infinite;
+      }
+    }
+  }
+
+  .progress-bar-info {
+    opacity: .5;
+  }
+}
+
+@keyframes marquee {
+    0%   {
+      left: 100%;
+      transform: translate(0, -50%);
+    }
+    100% {
+      left: 0;
+      transform: translate(-103%, -50%);
+    }
+}
+
+.playlist {
+  @extend .transition-all;
+
+  height: 300px;
+  overflow: scroll;
+  margin-top: $grid-gutter-width / 2;
+  -webkit-overflow-scrolling: touch;
+
+  &.ng-enter.ng-enter-active,
+  &.ng-leave {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+    max-height: 300px;
+  }
+
+  &.ng-leave.ng-leave-active,
+  &.ng-enter {
+    opacity: 0;
+    transform: translateY(-30px) translateZ(0);
+    max-height: 0;
+  }
+
+  &.ng-enter:not(.ng-enter-active),
+  &.ng-leave.ng-leave-active {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  &.ng-leave.ng-leave-active {
+    transform: translateY(30px) translateZ(0);
+  }
+}

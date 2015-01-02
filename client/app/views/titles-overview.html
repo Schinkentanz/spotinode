@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+
+    <div class="am-fade pagination-loader" ng-if="pagination.isLoading"></div>
+    <div class="col-xs-12 tac pagination-wrapper am-fade-and-slide-top" ng-if="pagination.total">
+      <pagination ng-model="pagination.currentPage"
+                  ng-change="pagination.pageChanged()"
+                  total-items="pagination.total"
+                  items-per-page="pagination.limit"
+                  max-size="viewport.isLtMD ? 4 : pagination.max"
+                  boundary-links="true"
+                  class="pagination"
+                  previous-text="&lsaquo;"
+                  next-text="&rsaquo;"
+                  first-text="&laquo;"
+                  last-text="&raquo;"
+                  ng-class="{'pagination-sm': viewport.isLtMD}"></pagination>
+      <p class="text-muted small" ng-bind="pagination.text"></p>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="col-xs-12">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Artist</th>
+              <th>Song</th>
+              <th>Album</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="title in titles"
+                sn-title-view
+                show-album-name
+                show-artist-name></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
